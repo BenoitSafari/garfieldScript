@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Debug App",
+            "type": "node",
+            "request": "launch",
+            "runtimeVersion": "18.19.0",
+            "program": "${workspaceFolder}/app/launch.mjs",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ]
+}
