@@ -11,8 +11,6 @@ const tests = readdirSync(srcFolder).filter(file => file.endsWith('.mjs') && fil
 
 const runTest = test => {
     return new Promise(resolve => {
-        logger.logStart(test);
-
         const child = fork(join(srcFolder, test), {
             stdio: 'inherit',
         });
