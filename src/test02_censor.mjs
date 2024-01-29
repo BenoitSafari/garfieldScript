@@ -7,6 +7,8 @@ const glados = new GLaDOS();
  * - La valeur en sortie doit être de type "string"
  * - Le deuxieme parametre doit être un tableau de mots à censurer
  * - Le troisieme parametre (optionnel) doit être un caractère de remplacement, s'il n'est pas fourni, il doit être remplacé par des astérisques
+ *
+ * Voir https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
  */
 function censor(value, words, replacement) {
     return 'NOT_IMPLEMENTED';
