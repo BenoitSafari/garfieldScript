@@ -30,6 +30,62 @@ export default class GLaDOS {
         }
     }
 
+    testCensor(callback) {
+        if (callback() === 'NOT_IMPLEMENTED') return;
+
+        const payloads = [
+            {
+                value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                words: ['ipsum', 'elit'],
+                expected: 'Lorem ***** dolor sit amet, consectetur adipiscing *****.',
+            },
+            {
+                value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                words: ['ipsum', 'elit'],
+                replacement: 'X',
+                expected: 'Lorem XXXXX dolor sit amet, consectetur adipiscing XXXXX.',
+            },
+        ];
+
+        const payloadsShouldThrow = [
+            { value: 0, words: ['ipsum', 'elit'] },
+            { value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', words: 'ipsum' },
+            {
+                value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                words: ['ipsum', 'elit'],
+                replacement: 0,
+            },
+            {
+                value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                words: ['ipsum', 'elit'],
+                replacement: {},
+            },
+            {
+                value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                words: ['ipsum', 'elit'],
+                replacement: [],
+            },
+            {
+                value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                words: ['ipsum', 'elit'],
+                replacement: null,
+            },
+        ];
+
+        try {
+            for (const payload of payloads) {
+                if (callback(payload.value, payload.words, payload.replacement) !== payload.expected) throw 0;
+            }
+            for (const payload of payloadsShouldThrow) {
+                if (!this.testShouldThrow(() => callback(payload.value, payload.words, payload.replacement))) throw 0;
+            }
+
+            process.send(1);
+        } catch (e) {
+            process.send(0);
+        }
+    }
+
     testShouldThrow(callback) {
         try {
             callback();
