@@ -18,6 +18,7 @@ export default class GLaDOS {
 
         try {
             for (const payload of payloads) {
+                this.logPayload(payload);
                 if (callback(payload.value) !== payload.expected) throw 0;
             }
             for (const payload of payloadsShouldThrow) {
@@ -37,5 +38,9 @@ export default class GLaDOS {
         } catch (e) {
             return true;
         }
+    }
+
+    logPayload(payload) {
+        process.send(`Test with payload: ${JSON.stringify(payload.value)}`);
     }
 }

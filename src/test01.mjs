@@ -12,7 +12,7 @@ const glados = new GLaDOS();
  * Voir https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
  */
 function convertToEuro(value) {
-    return 'NOT_IMPLEMENTED';
+    return 2;
 }
 
 glados.testConvertToEuro(convertToEuro);

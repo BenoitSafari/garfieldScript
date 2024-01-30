@@ -18,6 +18,7 @@ const runTest = test => {
         });
 
         child.on('message', state => {
+            if (isNaN(Number(state))) return logger.log(state);
             if (Number(state) === 1) logger.logSuccess(test);
             if (Number(state) === 0) logger.logError(test);
             resolve();
