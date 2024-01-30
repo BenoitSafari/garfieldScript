@@ -34,7 +34,7 @@ export default class Logger {
         "Pourtant c'était pas compliqué",
         'Fais un effort stp',
         'Ca va pas du tout',
-        'P-e faire une reconversion? (dans autre chose que le code je veux dire)',
+        'P-e faire une reconversion? (dans autre chose que le dev je veux dire)',
         "C'est l'exemple parfait de ce qu'il ne faut pas faire",
         "honteux, c'est honteux",
         'Pauvre code...',
@@ -47,15 +47,7 @@ export default class Logger {
     log(message, type = 'info', bold = false) {
         let color = this.colors[type] || this.colors.info;
         bold && (color += this.colors.bold);
-        console.log(`${this.getFormattedTime()}${color}${message}\x1b[0m`);
-    }
-
-    /**
-     * @param {string} test - The name of the test
-     */
-    logStart(test) {
-        console.log('\n');
-        this.log(`${test}...`, 'info', true);
+        console.log(`${color}${message}\x1b[0m`);
     }
 
     /**
@@ -73,11 +65,6 @@ export default class Logger {
     logError(test, e) {
         console.log(`\n${this.colors.error}${test} échoué !`);
         console.log(`${this.colors.error}${this.getRandomFailText()}`);
-    }
-
-    getFormattedTime() {
-        const date = new Date();
-        return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} - `;
     }
 
     getRandomSuccessText() {
